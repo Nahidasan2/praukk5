@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Kalkulator</title>
+</head>
+<style>
+    body{
+        display: flex;
+        justify-content: center;
+        margin-top: 200px;
+        background: url('pemandangan.jpg');
+        background-size: cover;
+    }
+    input[type="text"]{
+        width: 150px;
+        height: 50px;
+        font-size: 25px;
+        background: transparent;
+        color: white;
+    }
+    input[type="button"]{
+        width: 50px;
+        height: 50px;
+        background: transparent;
+        color: white;
+    }
+    .Kalkulator {
+        justify-content: center;
+        background: transparent;
+        border-radius: 10px;
+        backdrop-filter: blur(10px); 
+        box-shadow: 0 10px 10px rgba(183, 0, 255, 0.2); 
+        padding: 20px;
+        width: 220px; 
+    }
+    input[value="="]{
+        width: 105px;
+    }
+    input[type="button"]:hover {
+    background-color: rgba(0, 167, 179, 0.8);
+    }
+</style>
+<body>
+    <div class="Kalkulator">
+        <input type="text" id="display">
+        <input type="button" value="DEL" onclick="deleteone()" class="deleteone">
+        <input type="button" value="C" onclick="deleteall()">
+        <input type="button" value="7" onclick="tampilkan('7')">
+        <input type="button" value="8" onclick="tampilkan('8')">
+        <input type="button" value="9" onclick="tampilkan('9')">
+        <input type="button" value="/" onclick="tampilkan('/')">
+        <input type="button" value="4" onclick="tampilkan('4')">
+        <input type="button" value="5" onclick="tampilkan('5')">
+        <input type="button" value="6" onclick="tampilkan('6')">
+        <input type="button" value="*" onclick="tampilkan('*')">
+        <input type="button" value="1" onclick="tampilkan('1')">
+        <input type="button" value="2" onclick="tampilkan('2')">
+        <input type="button" value="3" onclick="tampilkan('3')">
+        <input type="button" value="+" onclick="tampilkan('+')">
+        <input type="button" value="-" onclick="tampilkan('-')">
+        <input type="button" value="0" onclick="tampilkan('0')">
+        <input type="button" value="00" onclick="tampilkan('00')">
+        <input type="button" value="." onclick="tampilkan('.')">
+        <input type="button" value="=" onclick="hasil()">
+        <input type="button" value="%" onclick="persen()">
+    </div>
+</body>
+<script>
+    function tampilkan(value) {
+    display = document.getElementById('display');
+    display.value += value;
+}
+    function deleteone() {
+    display = document.getElementById('display');
+    display.value = display.value.slice(0, -1);
+}
+    function deleteall() {
+    document.getElementById('display');
+    display.value = '';
+}
+    function persen() {
+    let display = document.getElementById('display');
+    let currentValue = display.value;
+
+    if (currentValue) {
+        display.value += '%';
+    }
+}
+
+    function hasil() {
+    let display = document.getElementById('display');
+    let expression = display.value;
+
+    expression = expression.replace(/(\d+)%/g, '($1 / 100)');
+
+    try {
+        display.value = eval(expression);
+    } catch (error) {
+        display.value = 'Error';
+    }
+}
+
+</script>
+</html>
